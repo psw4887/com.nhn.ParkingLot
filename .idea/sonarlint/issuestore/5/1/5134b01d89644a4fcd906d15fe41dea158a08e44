@@ -1,0 +1,7 @@
+
+M
+java:S5838!"2Use assertThat(actual).contains(expected) instead.(–©ó°ùÿÿÿÿ
+L
+java:S5838@"1Use assertThat(actual).hasSize(expected) instead.(š·À•üÿÿÿÿ
+G
+java:S5838B"1Use assertThat(actual).hasSize(expected) instead.(÷ìÐÞ
