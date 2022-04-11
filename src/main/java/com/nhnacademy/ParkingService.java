@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingService{
-    private List<String> parkArea = new ArrayList<>();
-    private List<String> entry = new ArrayList<>();
-    private List<String> exit = new ArrayList<>();
+    private final List<String> parkArea = new ArrayList<>();
+    private final List<String> entry = new ArrayList<>();
+    private final List<String> exit = new ArrayList<>();
     public int carCome(Car car) {
         if (car.getType() == Type.대형) {
             throw new CarTypeTooBigException("To Big Type Car");
@@ -53,8 +53,7 @@ public class ParkingService{
 
     public boolean barcodeReading(Car car) {
         Payco payco = new Payco();
-        boolean access = payco.access(car.getOwner());
-        return access;
+        return payco.access(car.getOwner());
     }
 
     public List<String> getEntry() {
