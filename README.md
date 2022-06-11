@@ -1,67 +1,77 @@
 # com.nhnacademy.ParkingLot
-##[요구사항1]
+![PL1B2eCm4DrxYYpjnaj85mKBXT83ZCaWGPF8J8HAwTqx9a74PZKlxpCluT7w6GYSwa6F0uN5cpPCWLGay2mK-bZf2PZL0qZKmtFbY4vzAYLdpdTTY0bsbgDQ68chRtMopQ2nk7Gmc0UWFw5a5LbAuyt72KiLfBffcak6RnipsYEkVgkzxs4D_gmGqzvzhQN0WMo12kSNr-EXsqlULAXjl1bbJKBtu75LuEJZeiX_](https://user-images.githubusercontent.com/83569822/173198346-38d4635e-493c-47b9-8c84-5af925a494bb.png)
 
-제공하는 상수도 요금표를 메모리에 로드하고 사용자가 입력한 사용량에 따라 요금을 지자체별, 업종별로 표시하는 기능을 제공하세요.
-가장 저렴한 가격(billTotal)을 가진 항목을 5개만 가격 오름차순으로 표시합니다.
+# 스펙 1.
 
-입출력 예
+주차장에 차가 들어온다.
 
-> 1000
+차가 들어오면 번호판을 인식(scan)합니다.
 
-WaterBill{city='고령군', sector='공업용', unitPrice=370, billTotal=370000}
+A-1 에 주차한다.
 
-WaterBill{city='통영시', sector='원정수판매용', unitPrice=413, billTotal=413000}
+차를 특정 주차구역(ParkingSpaces)에 주차합니다.
 
-'''
-> 2000
+주차장에서 차가 나간다. 차가 나갈려면 주차 시간만큼 결제를 해야한다.
 
-WaterBill{city='고령군', sector='공업용', unitPrice=370, billTotal=740000}
+만약 돈이 없으면 나갈 수 없습니다.
 
-WaterBill{city='통영시', sector='원정수판매용', unitPrice=413, billTotal=826000}
+# 요금표
 
-'''
+시간	요금	비고
 
-> 3000
+최초 30분	1,000원	
 
-WaterBill{city='고령군', sector='공업용', unitPrice=370, billTotal=1110000}
+추가 10분	500원	1초라도 넘으면 부과됩니다.
 
-WaterBill{city='통영시', sector='원정수판매용', unitPrice=413, billTotal=1239000}
-'''
-##[설계 요구사항]
+일일 주차	10,000원	일 최대 금액입니다. 24:00이 넘어가면 추가 요금이 부과됩니다.
 
-다음의 역할을 하는 스프링빈을 각각 생성해야 합니다.
+2일 연속 주차 시 20,000원
 
-csv 파일을 파싱하는 스프링빈 (인터페이스 포함)
+30분 1초 주차한 경우 요금은 1,500원입니다.
+50분 주차한 경우 요금은 2,000원입니다.
+61분 주차한 경우 요금은 3,000원입니다.
+6시간 주차한 경우 요금은 10,000원입니다.
 
-결과를 화면에 표시하는 스프링빈 (인터페이스 포함)
+# 스펙 2.
 
-요금표 데이터를 저장하고 조회하는 역할을 하는 스프링빈
+주차장 입구가 n개 입니다.
 
-입력받은 사용량으로 요금표에서 구간을 찾아내고 요금을 계산해 주는 스프링빈
+주차장 출구도 n개 입니다
 
-실행하는 스프링 빈의 모든 메소드의 실행시간을 elapse.log 파일에 저장하세요. (AOP 를 이용해야 합니다.)
+# 스펙 3.
 
-##[요구사항3]
+요금표가 변경 됐습니다.
 
-테스트 코드를 작성하세요.
+요금표
 
-1차 SonarQube 테스트
+시간	요금	비고
 
-##[요구사항4]
+최초 30분	무료	
 
-원본 데이터가 CSV 형식에서 JSON 형식으로 변경되었습니다.
+최초 30초과 ~ 1시간	1,000원	
 
-JSON 포멧의 데이터를 읽어서 동일한 기능을 하도록 수정하세요.
+이 후 추가 10분	500원	1초라도 넘으면 부과됩니다.
 
-가능하면 확장자에 따라 자동으로 parser 를 선택하도록 구현하세요.
+일일 주차	15,000원	일 최대 금액입니다. 24:00이 넘어가면 추가 요금이 부과됩니다.
 
-jackson 라이브러리를 사용하세요.
+2일 연속 주차 시 30,000원
 
-<dependencies>
-    ...
-    <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.13.2.2</version>
-    </dependency>
-<dependencies>
+경차의 경우 요금이 50% 감면됩니다.
+
+주차장에 대형차(트럭 등)는 주차할 수 없습니다.
+
+# 스펙 4.
+
+사용자(User)가 Payco 회원인 경우에는 주차 요금이 10% 할인됩니다.
+
+Payco 회원은 바코드를 통해서 Payco 인증 서버에 인증 후 할인됩니다.
+
+만약 Payco 인증이 안되는 경우에는 익명 사용자로 간주됩니다.
+
+그 외 사용자는 익명사용자로 간주하며, 요금할인 혜택이 없습니다.
+
+# 시간 주차권이 존재합니다.
+
+3시간 주차 후 2시간 주차권을 제시하면, 1시간 요금만 정산하면 됩니다.
+
+59분 주차 후 1시간 주차권을 제시하면, 무료입니다.
