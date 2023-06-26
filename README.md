@@ -1,4 +1,4 @@
-# com.nhnacademy.ParkingLot
+# com.nhn.ParkingLot
 ![PL1B2eCm4DrxYYpjnaj85mKBXT83ZCaWGPF8J8HAwTqx9a74PZKlxpCluT7w6GYSwa6F0uN5cpPCWLGay2mK-bZf2PZL0qZKmtFbY4vzAYLdpdTTY0bsbgDQ68chRtMopQ2nk7Gmc0UWFw5a5LbAuyt72KiLfBffcak6RnipsYEkVgkzxs4D_gmGqzvzhQN0WMo12kSNr-EXsqlULAXjl1bbJKBtu75LuEJZeiX_](https://user-images.githubusercontent.com/83569822/173198346-38d4635e-493c-47b9-8c84-5af925a494bb.png)
 
 # 스펙 1.
